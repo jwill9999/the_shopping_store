@@ -10,15 +10,26 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 import App from './App';
 
+
+/*********************************************************
+ *  @description 
+ *  connects redux store to App
+ *  React router intergration
+ *  Persists state with redux- persist 
+ * 
+ *  @params Provider - store
+ *  @params PersistGate - persistor
+ *********************************************************/
+
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <PersistGate persistor={persistor}>
-        <App />
-      </PersistGate>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <BrowserRouter>
+            <PersistGate persistor={persistor}>
+                <App />
+            </PersistGate>
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('root')
 );
 
 serviceWorker.register();

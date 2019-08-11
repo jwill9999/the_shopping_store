@@ -1,3 +1,9 @@
+/********************************************************
+ * 
+ *  Enzyme tests setup from enzyme documentation
+ * 
+ *********************************************************/
+
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
