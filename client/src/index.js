@@ -6,7 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { store, persistor } from './redux/store';
 import * as serviceWorker from './serviceWorker';
-
+import collectionsArray from "./pages/shop/shop.data";
 import './index.css';
 import App from './App';
 
@@ -25,7 +25,7 @@ ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <PersistGate persistor={persistor}>
-                <App />
+                <App collectionsArray={collectionsArray} />
             </PersistGate>
         </BrowserRouter>
     </Provider>,

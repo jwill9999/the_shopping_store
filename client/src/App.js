@@ -12,6 +12,12 @@ import { GlobalStyle } from './global.styles';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
+//import { addCollectionAndDocuments } from "./firebase/firebase.utils";
+
+
+
+
+
 
 /********************************************************
  * 
@@ -34,10 +40,13 @@ const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
  *  firebase to confirm current user snapshot exists.
  * 
  *********************************************************/
-const App = ({ checkUserSession, currentUser }) =>
+const App = ({ checkUserSession, currentUser, collectionsArray }) =>
 {
+
+    console.log(collectionsArray);
     useEffect(() =>
     {
+        //addCollectionAndDocuments('collections', collectionsArray.map(({ title, items }) => ({ title, items })));
         checkUserSession();
     }, [checkUserSession]);
 
@@ -73,7 +82,8 @@ const App = ({ checkUserSession, currentUser }) =>
  *********************************************************/
 
 const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser
+    currentUser: selectCurrentUser,
+
 });
 
 
