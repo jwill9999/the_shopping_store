@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
 
 import CollectionItem from '../../components/collection-item/collection-item.component';
 
-import { selectCollection } from '../../redux/shop/shop.selectors';
+import { selectCollection, selectItem } from '../../redux/shop/shop.selectors';
 
 import
 {
@@ -13,28 +12,24 @@ import
     CollectionItemsContainer
 } from './collection.styles';
 
-export const CollectionPage = ({ collection, match }) =>
+export const CollectionSingleItem = ({ collection, item, match }) =>
 {
     const { title, items } = collection;
+
 
     return (
         <CollectionPageContainer>
             <CollectionTitle>{title}</CollectionTitle>
             <CollectionItemsContainer>
-                {items.map(item => (
-                    <Link to={`${match.params.collectionId}/${item.id}`} >
-                        <CollectionItem key={item.id} item={item} />
-                    </Link>
-
-
-                ))}
+                <CollectionItem key={item.id} item={item} />
             </CollectionItemsContainer>
         </CollectionPageContainer>
     );
 };
 
 const mapStateToProps = (state, ownProps) => ({
-    collection: selectCollection(ownProps.match.params.collectionId)(state)
+    collection: selectCollection(ownProps.match.params.collectionId)(state),
+    item: selectItem(ownProps.match.params.itemId, ownProps.match.params.collectionId)(state)
 });
 
-export default connect(mapStateToProps)(CollectionPage);
+export default connect(mapStateToProps)(CollectionSingleItem);

@@ -9,40 +9,56 @@ import Spinner from '../../components/spinner/spinner.component';
 import { ShopPageContainer } from './shop.styles';
 
 const CollectionsOverviewContainer = lazy(() =>
-  import('../../components/collections-overview/collections-overview.container')
+    import('../../components/collections-overview/collections-overview.container')
 );
 
 const CollectionPageContainer = lazy(() =>
-  import('../collection/collection.container')
+    import('../collection/collection.container')
+);
+const CollectionItemContainer = lazy(() =>
+    import('../collection/collection.item.container')
 );
 
-export const ShopPage = ({ fetchCollectionsStart, match }) => {
-  useEffect(() => {
-    fetchCollectionsStart();
-  }, [fetchCollectionsStart]);
+export const ShopPage = ({ fetchCollectionsStart, match }) =>
+{
+    useEffect(() =>
+    {
+        fetchCollectionsStart();
+    }, [fetchCollectionsStart]);
 
-  return (
-    <ShopPageContainer>
-      <Suspense fallback={<Spinner />}>
-        <Route
-          exact
-          path={`${match.path}`}
-          component={CollectionsOverviewContainer}
-        />
-        <Route
-          path={`${match.path}/:collectionId`}
-          component={CollectionPageContainer}
-        />
-      </Suspense>
-    </ShopPageContainer>
-  );
+    return (
+        <ShopPageContainer>
+            <Suspense fallback={<Spinner />}>
+                <Route
+                    exact
+                    path={`${match.path}`}
+                    component={CollectionsOverviewContainer}
+                />
+            </Suspense>
+
+            <Route
+                exact
+                path={`${match.path}/:collectionId`}
+                component={CollectionPageContainer}
+            />
+
+            <Route
+                exact
+                path={`${match.path}/:collectionId/:itemId`}
+                component={CollectionItemContainer}
+            />
+
+
+
+        </ShopPageContainer>
+    );
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
+    fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
 export default connect(
-  null,
-  mapDispatchToProps
+    null,
+    mapDispatchToProps
 )(ShopPage);
